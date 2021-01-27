@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   emu-proxy:
-    image: basol.ch/emu-proxy:latest
+    image: basolch/emu-proxy:latest
     restart: always
     environment:
       PORT: 3010
