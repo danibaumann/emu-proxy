@@ -19,6 +19,7 @@ const __dirname = dirname(__filename)
 
 // // Routers
 import statsRoutes from './routes/statesRoute.js'
+import serviceRoutes from './routes/serviceRoute.js'
 
 let server
 
@@ -39,7 +40,7 @@ app.use(express.json())
 // ignore every request to /v1/services/ping
 app.use(log4js.connectLogger(log, { level: 'auto', nolog: 'ping' }))
 
-app.use(express.json({ limit: process.env.BODYLIMIT }))
+app.use(express.json({ limit: process.env.BODYLIMIT || '1mb' }))
 
 // START App security
 app.use(helmet())
@@ -49,6 +50,7 @@ app.use(cors(process.env.CORS))
 // END Security
 
 app.use('/v1/stats', statsRoutes)
+app.use('/v1/services', serviceRoutes)
 
 app.use(notFound)
 app.use(errorHandler)

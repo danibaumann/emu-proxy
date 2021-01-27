@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  emu-proxy:
+    image: basol.ch/emu-proxy:latest
+    restart: always
+    environment:
+      PORT: 3010
+      HOSTS: '10.0.79.2'
+      CORS: '*:*'
+      LOG_LEVEL: 'debug'
+    ports:
+      - '3003:3010'

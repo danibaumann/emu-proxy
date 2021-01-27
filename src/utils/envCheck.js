@@ -1,6 +1,6 @@
 const envCheck = () => {
   // Ensure required ENV vars are set
-  let requiredEnv = ['HOSTS', 'PORT', 'CORS']
+  let requiredEnv = ['HOSTS', 'CORS']
   let unsetEnv = requiredEnv.filter(
     (env) => !(typeof process.env[env] !== 'undefined')
   )

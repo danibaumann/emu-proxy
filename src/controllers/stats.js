@@ -12,13 +12,7 @@ const log = getLogger()
 // @access  Public
 const getStats = asyncHandler(async (req, res, next) => {
   const hosts = process.env.HOSTS.split(',')
-  let data
   log.debug(hosts)
-  const valuesToFetch = Object.values(EmuStat)
-  const keyForArray = Object.keys(EmuStat)
-  log.debug(valuesToFetch)
-
-  const dataPoint = 4200
 
   if (!hosts || hosts.length === 0) {
     return res.status(500).json('No Hosts provided in environment')
@@ -27,17 +21,24 @@ const getStats = asyncHandler(async (req, res, next) => {
   log.info('will fetch latest data')
   const dataToReturn = []
   for await (const h of hosts) {
-    let hostData = {}
     log.debug(`Will query host: ${h}`)
     let i = 0
-    for await (const v of valuesToFetch) {
-      const key = keyForArray[i]
-      log.debug(`Fetching Data: ${key}`)
-      const response = await axios.get(`http://${h}/${v}`)
-      hostData[key] = response.data
+    const data = {}
+    for await (const v of EmuStat) {
+      const id = v.id
+      log.debug(`Fetching Data: ${id}`)
+      try {
+      } catch (err) {
+        log.error(err.message)
+      }
+      const response = await axios.get(`http://${h}/${v.register}`)
+      data[id] = { value: response.data, unit: v.unit, label: v.label }
+      // tmpArray.push({
+      //   id:,
+      // })
       i++
     }
-    dataToReturn.push(hostData)
+    dataToReturn.push({ ip: h, data })
   }
 
   log.debug(dataToReturn)

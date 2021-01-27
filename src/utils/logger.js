@@ -4,9 +4,7 @@ let logger
 const initLogger = () => {
   // set logger output on development and production level
   let outputs =
-    process.env.NODE_ENV === 'development'
-      ? ['console']
-      : ['file', 'gelf', 'console']
+    process.env.NODE_ENV === 'development' ? ['console'] : ['file', 'console']
 
   log4js.addLayout('json', (config) => {
     return function (logEvent) {
@@ -16,15 +14,6 @@ const initLogger = () => {
 
   log4js.configure({
     appenders: {
-      gelf: {
-        type: '@log4js-node/gelf',
-        host: process.env.LOGGER_HOST,
-        port: process.env.LOGGER_PORT,
-        layout: {
-          type: 'pattern',
-          pattern: '%d %-5p %c [%m] (%f{1}) <%h>',
-        },
-      },
       console: {
         type: 'console',
         layout: {

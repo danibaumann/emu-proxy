@@ -8,9 +8,7 @@
     "dev": "NODE_ENV=development LOG_LEVEL=debug nodemon src",
     "start": "NODE_ENV=production node src",
     "docker:image": "docker build -t ${IMAGE}:${TAG} .",
-    "docker:upload": "docker save ${IMAGE}:$TAG | bzip2 | pv | ssh ams1 'bunzip2 | docker load'",
-    "docker:rename": "ssh ams1 'docker tag '${IMAGE}:${TAG}' '${IMAGE}:${RENAMED}''",
-    "release": "node create-release.js"
+    "docker:upload": "docker push basolch/emu-proxy --all-tags"
   },
   "repository": {
     "type": "git",

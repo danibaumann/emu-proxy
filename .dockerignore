@@ -12,3 +12,4 @@ Dockerfile
 dist/
 docker-compose.yml
 .git
+logs
