@@ -72,10 +72,10 @@ const getSmlStats = asyncHandler(async (req, res, next) => {
         // tmpArray.push({
         //   id:,
         // })
-        i++
       } else {
         return
       }
+      i++
     }
     dataToReturn.push({ ip: h, data })
   }
