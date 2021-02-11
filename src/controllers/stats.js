@@ -72,8 +72,6 @@ const getSmlStats = asyncHandler(async (req, res, next) => {
         // tmpArray.push({
         //   id:,
         // })
-      } else {
-        return
       }
       i++
     }
